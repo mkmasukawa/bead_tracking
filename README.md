@@ -5,7 +5,10 @@ Tracking beads is a task that is often used in miniature systems, since the posi
 
 This software was developed to track fast moving polysterene beads observed by brightfield against a patterned opaque background. For example:
 
-![](158.gifs=100)
+
+![](158.gif)
+
+_Polysterene beads have distinct moves in liquid paraffin containing surfactant span 80 when an electric field is applied. The motion patterns depend on the voltage and surfactant concentration._
 
 The main part of the code was provided by this StackOverflow answer.
 
@@ -28,7 +31,13 @@ where infile.avi is the name of your video and image-03%.jpg is the name format 
 
 A way to detect a moving object is to generate a background image and then subtract each frame from the image being analyzed. 
 
-For this, use the average.py 
+For this, use the **average.py** contained in this project.
+
+This will produce an image where the objects in motion will appear blurred. 
+
+
+
+
 
 
 
