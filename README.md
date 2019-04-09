@@ -4,7 +4,6 @@ Software used:
 ffmpeg
 
 
-
 From the video to the position of beads in Linux.
 
 1) Convert the video to a series of images
@@ -19,3 +18,5 @@ where infile.avi is the name of your video and image-03%.jpg is the name format 
 2) Make an average image
 
 A way to detect a moving object is to generate a background image and then subtract each frame from the image being analyzed.
+
+For this, use the software
