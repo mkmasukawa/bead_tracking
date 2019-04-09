@@ -25,3 +25,7 @@ where infile.avi is the name of your video and image-03%.jpg is the name format 
 A way to detect a moving object is to generate a background image and then subtract each frame from the image being analyzed. 
 
 For this, use the average.py 
+
+
+![](name-of-giphy.gif)
+
