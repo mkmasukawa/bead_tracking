@@ -50,14 +50,38 @@ In an ideal average image, we obtain a clear background that can be subtracted t
 To solve that, we have to manually clean the background image using image software. Here, we used the ipad Photoshop Fix app with the healing tool to erase the ghost traces. For example:
 
 <p align="center">
-  <img width="250" src="images/158_erased.jpg">
+  <img width="250" src="images/158_erased.JPG">
 </p>
 
 
 ### 3. **Set parameters for bead identification**
 
-In this case, we are trying to identify particles that don't have a traditional appearence, so it can be difficult for the software to identify the bead features. To solve that, parameter of the particles such as size and eccentricity are passed down to a software and the parameters have to be manually tested. 
+We are trying to identify particles that don't have a traditional appearence, so it can be difficult for the software to identify the bead features. To solve that, parameter of the particles such as size and eccentricity are passed down to a software and the parameters have to be manually tested. 
 
-The test is made by subtracting one 
+<p align="center">
+  <img width="250" src="images/158_processed.png">
+</p>
 
+_The image treatment outputs an image which, ideally, is composed of a black background with bright spots marking the position of the particles._
+
+<p align="center">
+  <img width="250" src="images/158_marked.png">
+</p>
+
+_The software correctly identified the position of the beads, even though the shape of the bright spots did not correspond to the spherical shape of the particles._
+
+#### Overview of the detection algorithm and parameters
+
+The parameters that have to be chosen manually are:
+
+- ellipse_morph_x: used in case the particles are not spherical 
+- ellipse_morph_y: used in case the particles are not spherical 
+- radius: expected average radius of particles in pixels
+- border_size: expected border of particles
+- gap: minimum distance between particles
+- threshold_binary: value for a threshold filter
+- power_filter: the value of every pixel in an image becomes value^power_filter
+- brighten_factor: the value of all pixels in am image becomes value x brighten_factor
+
+The algorithm works by 
 
