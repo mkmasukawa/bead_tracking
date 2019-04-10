@@ -132,3 +132,8 @@ To link the positions, use the **tracking.py** and adjust the following paramete
 
 The result is shown below for one
 
+<p align="center">
+  <img width="250" src="images/158_trajec2.gif">
+</p>
+
+_Particle trajectory._
