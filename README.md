@@ -103,3 +103,14 @@ From here on, the algorithm from Stack overflow is applied without modifications
 - [Distance transform](https://www.tutorialspoint.com/opencv/opencv_distance_transformation.htm): a distance transform is taken from the image generated from the template matching. In this image, the center of the regions that matched the template of a bead appear brighter. Then, the image from the morphological closing and the distance transform are multiplied. The result is an image with more or less uniform bright spots.
 - [Threshold](https://docs.opencv.org/3.4/d7/d4d/tutorial_py_thresholding.html): finally, a threshold is applied to the image. The result are white spots against a black background. if the parameters were set correctly, the center of these spots coincide with the position of the beads, even if they were blurry on the original image. To detect the center of these bright spots, there is function to locate the local maxima.  
 
+### 4. **Apply the detection software to all the frames**
+
+After suitable parameters for the detection of beads were found, the detection can be applied to all frames. 
+
+When applying the same parameters for all frames, it is common that artifacts appear in a few frames, for example:
+
+_The detection software identified a third bead, which does not exist._
+
+As long as the artifact is not persistent throughout the frames and the position of the real beads is correctly identified, this is not a problem. The artifacts can be eliminated in the next step of tracking.
+
+
