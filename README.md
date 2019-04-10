@@ -130,10 +130,25 @@ To link the positions, use the **tracking.py** and adjust the following paramete
 - _code_: a identifier for the experiment 
 - __
 
-The result is shown below for one
+The **tracking.py file** outputs a csv, which can be plotted.
+
+### 6. **Plot the particle trajectory and analyze the statistics of position of particles**
+
+The code **trace_bead.py** allows the plotting of the trajectory of particles. here you can eliminate artefacts by manually choosing the beads that will be plotted. The bead number and position can be observed in the .csv file generated at step 5.
 
 <p align="center">
   <img width="250" src="images/158_trajec2.gif">
 </p>
 
-_Particle trajectory._
+_Particle trajectory. Note that there are some artifacts in the position of the particle, mainly when they are out of focus._
+
+
+For further analisys of the trajectory of the particles, the code **analyze_trajectory.py** provides four measures that allow the visualization of possible trends in the movement of particles:
+
+- Distribution of Velocity of particles
+- Distribution of the step size
+- Distribution of distance to reference position
+- Distribution of distance to the closest beads
+ 
+In this software it is also necessary to manually select the beads which are not artifacts.
+
