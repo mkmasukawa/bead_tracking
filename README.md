@@ -109,8 +109,26 @@ After suitable parameters for the detection of beads were found, the detection c
 
 When applying the same parameters for all frames, it is common that artifacts appear in a few frames, for example:
 
+<p align="center">
+  <img width="250" src="images/image-016.jpg">
+</p>
+
 _The detection software identified a third bead, which does not exist._
 
 As long as the artifact is not persistent throughout the frames and the position of the real beads is correctly identified, this is not a problem. The artifacts can be eliminated in the next step of tracking.
+
+### 5. **Use TrackPy to track the position of the beads**
+
+The steps 1 to 6 allowed us to identify the position of beads in each frame, but to track the position between frames, it is necessary to link the position of the beads in a sequence of frames. This can be very difficult to implement. One approach is to observe a few frames and try to foresse the trajectory of the bead, then see on the next frames which are the beads most likely to be. 
+
+Luckly, this has been implemented in a tool kit called [TrackPy](github.com/soft-matter/trackpy), which we will use here.
+
+Trackpy has its own particle detection function with adjustable parameters, but it is not enough for non-deal situations like we described (beads out of focus, quickly moving, non-uniform brightness). Therefore, we performed steps 1 to 6 to produce a clear series of images with the position of beads and use TrackPy only for linking the position of the beads between frames.
+
+To link the positions, use the **tracking.py** and adjust the following parameters in the code:
+
+- _code_: a identifier for the experiment 
+- __
+
 
 
