@@ -12,7 +12,7 @@ This software was developed to track fast moving polysterene beads observed by b
 
 _Polysterene beads have distinct moves in liquid paraffin containing surfactant span 80 when an electric field is applied. The motion patterns depend on the voltage and surfactant concentration._
 
-The main part of the code was provided by this StackOverflow answer.
+The main part of the code was provided by  [this Stack overflow answer.](https://stackoverflow.com/questions/26932891/detect-touching-overlapping-circles-ellipses-with-opencv-and-python)
 
 This tutorial was tested in Ubuntu LTS 16.04.6 using Python 3.5.2. The steps can be adapted to use different OS and software.
 
@@ -58,6 +58,13 @@ To solve that, we have to manually clean the background image using image softwa
 
 We are trying to identify particles that don't have a traditional appearence, so it can be difficult for the software to identify the bead features. To solve that, parameter of the particles such as size and eccentricity are passed down to a software and the parameters have to be manually tested. 
 
+
+<p align="center">
+  <img width="250" src="images/image-292.jpg">
+</p>
+
+_Original image. In this image, the beads are out of focus. The bright regions are not uniform and are superimposed with the sawtooth electrodes. For simple tracking algorithms, it would be challenging to identify the position of these beads._
+
 <p align="center">
   <img width="250" src="images/158_processed.png">
 </p>
@@ -83,5 +90,16 @@ The parameters that have to be chosen manually are:
 - power_filter: the value of every pixel in an image becomes value^power_filter
 - brighten_factor: the value of all pixels in am image becomes value x brighten_factor
 
-The algorithm works by 
+The main part of the algorithm was obtained from [this Stack overflow answer](https://stackoverflow.com/questions/26932891/detect-touching-overlapping-circles-ellipses-with-opencv-and-python) with some additional steps. First, the background image produced on steps 2 and 3 is subtracted from the frame being analyzed. Then, the following steps are performed. Please refer to the links for a more detailed explanation.
+
+- (Power transformation)[https://www.tutorialspoint.com/dip/gray_level_transformations.htm]: the _value_ of each pixel of the image becomes _value^power_filter_. This brightens the brighter pixels and darkens the dimmer pixels. 
+- (Filter regional maxima)[http://scikit-image.org/docs/dev/auto_examples/color_exposure/plot_regional_maxima.html#sphx-glr-auto-examples-color-exposure-plot-regional-maxima-py]: the less bright areas of the images are used as a mask, that way, the brighter regions appear to be on a black background.
+- (Linear transformation)[https://www.tutorialspoint.com/dip/gray_level_transformations.htm]: the _value_ of each pixel of the image becomes _value x brighten_factor_.
+
+From here on, the algorithm from Stack overflow is applied without modifications:
+
+- (Morphological closing)[https://opencv-python-tutroals.readthedocs.io/en/latest/py_tutorials/py_imgproc/py_morphological_ops/py_morphological_ops.html]: this is the combination of teo transformations: dilation and closing. With dillation, the area of the bright regions is expanded. This will cause dark spots to diminish. Then, the edges of the new bright areas are again retracted. The result is a more uniform image and defects in the foreground images diminish.
+- (Template matching)[https://www.geeksforgeeks.org/template-matching-using-opencv-in-python/]: in this step, an image resembling a bead after the morphological closing is created based on the parameters _ellipse_morph_x,  ellipse_morph_y, radius_ and the template is matched to the image after the morphological closing. The matching will produce an image where the templates are superimposed to the regions that match the bead template. 
+- (Distance transform)[https://www.tutorialspoint.com/opencv/opencv_distance_transformation.htm]: a distance transform is taken from the image generated from the template matching. In this image, the center of the regions that matched the template of a bead appear brighter. Then, the image from the morphological closing and the distance transform are multiplied. The result is an image with more or less uniform bright spots.
+- (Threshold)[https://docs.opencv.org/3.4/d7/d4d/tutorial_py_thresholding.html]: finally, a threshold is applied to the image. The result are white spots against a black background. if the parameters were set correctly, the center of these spots coincide with the position of the beads, even if they were blurry on the original image. To detect the center of these bright spots, there is function to locate the local maxima.  
 
