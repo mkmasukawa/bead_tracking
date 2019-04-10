@@ -150,5 +150,5 @@ For further analisys of the trajectory of the particles, the code **analyze_traj
 - Distribution of distance to reference position
 - Distribution of distance to the closest beads
  
-In this software it is also necessary to manually select the beads which are not artifacts.
+In this software it is also necessary to manually select the beads which are not artifacts. This might not be necessary when a large number of beads is analyzed and the artifacts are few.
 
